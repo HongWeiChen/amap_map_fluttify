@@ -321,9 +321,15 @@ class _AmapViewState extends State<AmapView> {
         animated: false,
       );
     }
-    if (widget.markers != null && widget.markers.isNotEmpty) {
-      await _controller?.addMarkers(widget.markers);
+    try {
+      if (widget.markers != null && widget.markers.isNotEmpty) {
+        await _controller?.addMarkers(widget.markers);
+      }
+    } catch(e, stack) {
+      print(e);
+      print(stack);
     }
+
     if (widget.onMarkerClicked != null) {
       await _controller?.setMarkerClickedListener(widget.onMarkerClicked);
     }
